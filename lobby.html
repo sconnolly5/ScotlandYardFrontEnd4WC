@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <script src="js/lobbies.js"></script>
+
     <title>4 Week Challenge</title>
 </head>
 
@@ -41,25 +43,36 @@
 
     <!-- Contnet -->
     <div class="container py-3">
-        <!-- Introduction section -->
         <div class="row">
             <div class="col"></div>
             <div class="col-8">
-                <h1>Introduction</h1>
-                <p>Scotland Yard is a board game published in 1983. Originally, the game saw players chasing Mr. X around the streets of London, working together to identify the location of the mysterious man.</p>
-                <p>In the 4 Week Challenge version of Scotland Yard, you'll find yourself chasing your lecturers around the streets of Preston. It will be their job to dodge, duck, dip, dive and dodge the pesky students who keep trying to ask questions they
-                    don't know the answer to.</p>
+                <h1 class="text-center">Lobby</h1>
             </div>
             <div class="col"></div>
         </div>
-        <!-- Getting started section -->
-        <div class="row">
+        <div class="row py-3">
+            <div class="col"></div>
+            <div class="col">
+                <div class="bg-success p-3 rounded">
+                    <p class="text-center text-light" id="lobbyCode">AAAA</p>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row py-3">
             <div class="col"></div>
             <div class="col-8">
-                <h1>Getting Started</h1>
-                <p>Designate a leader of the group, they will create a lobby using the button at the top right of the page. The lobby creator will be presented with a 4 digit code, they should send this to their teammates through Microsoft Teams.</p>
-                <p>To join a lobby, click on the join lobby button at the top right of the page (in the navbar), you will be prompted for a 4 digit code, enter the code which your lobby leader has sent you. </p>
-                <p>The lobby leader will be able to select the map they wish to play, and start the game when ready.</p>
+                <h1 class="text-center">Map</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="cboMap">Map selection</label>
+                        <select class="form-control" id="cboMap">
+                          <option>Small</option>
+                          <option>Medium</option>
+                          <option>Large</option>
+                        </select>
+                    </div>
+                </form>
             </div>
             <div class="col"></div>
         </div>
