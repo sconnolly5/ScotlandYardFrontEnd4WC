@@ -1,0 +1,48 @@
+<!<!DOCTYPE html>
+<html>
+<head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <section class = "container">
+    <div class = "map">
+      <div style = "max-height: 1000; max-width: 1100; overflow: scroll">
+        <canvas id='canvas'  height = '1000' width = '1400' style="background-color: darkblue"> </canvas>
+        <img id = "mapImg" style="visibility:hidden" src = "map.png" alt = "UCLan Campus Map">
+      </div>
+
+</section>
+ </body>
+
+<script>
+window.onload = function() {
+
+  var c = document.getElementById("canvas");
+  var ctx = c.getContext("2d");
+  var img = document.getElementById("mapImg").src = "map.png";
+  ctx.drawImage(mapImg,0,0, mapImg.width = 1065, mapImg.height = 800);
+  var player1Colour = "red";
+  var pos = {
+    xPos: 850,
+    yPos: 343
+  };
+  drawPlayer(player1Colour,pos);
+
+}
+
+function drawPlayer(colour, pos)
+{
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(pos.xPos,pos.yPos,30,0,2 * Math.PI);
+    ctx.stroke();
+
+    ctx.fillStyle = colour;
+    ctx.globalAlpha = 0.5;
+    ctx.fill();
+}
+</script>
+
+
+</html>
