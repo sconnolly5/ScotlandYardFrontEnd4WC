@@ -7,3 +7,7 @@ const SERVER_GAME_ID_PARAM = "gameId";
 const ACTIVE_GAMES_PAGE_NAME = "/games.html";
 const MAP_PAGE = "/map.html";
 const USE_JSON_API = true;
+
+function isNull(obj) {
+    return obj == 'undefined' || obj == null;
+}
