@@ -1,12 +1,3 @@
-const PROTOCOL = "http://";
-const SERVER_URL = "localhost";
-const SERVER_PORT = "8080";
-const SERVER_ACTIVE_GAMES_PATH = "/games/descriptors";
-const ACTIVE_GAMES_PAGE_NAME = "/games.html";
-const MAP_PAGE = "/map.html";
-
-const USE_JSON_API = true;
-
 $(document).ready(function() {
     if (USE_JSON_API) {
         jsonDisplayActiveGames();
@@ -27,9 +18,9 @@ function jsonDisplayActiveGames() {
                 newEle.find("#templateId").text(value.gameId);
                 newEle.find("#templateNumPlayers").text(value.numPlayers);
                 newEle.find("#templateMap").text(value.mapName);
-                var redirectLocation = window.location.href;
+                let redirectLocation = window.location.href;
                 redirectLocation = redirectLocation.replace(ACTIVE_GAMES_PAGE_NAME, MAP_PAGE);
-                var newUrl = redirectLocation + "?game=" + value.gameId.toString();
+                let newUrl = redirectLocation + "?" + SERVER_GAME_ID_PARAM + "=" + value.gameId.toString();
                 newEle.find("#templateJoin").find('a').attr("href", newUrl);
                 $('#tblActiveGames').find('tbody').append(newEle);
             });
