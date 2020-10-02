@@ -28,7 +28,7 @@ function csvDisplayActiveGames() {
             }
 
             // If response was not OK
-            if (lines[0].split(",")[0] !== "OK") {
+            if (lines[0].split(",")[0].replaceAll("\"", "") !== "OK") {
                 console.log("Error recieved from server. Not able to retrieve games.");
                 return;
             }
@@ -38,9 +38,11 @@ function csvDisplayActiveGames() {
 
             // Put each game ID into the table
             for (var i = 0; i < lines.length; i++) {
-                values = line.split(",");
-                values[0] = values[0].replace("\"", "");
-                createTableElement(values[0], 0, "???");
+                values = lines[i].split(",");
+                for (var j = 0; j < values.length; j++) {
+                    values[j] = values[j].replaceAll("\"", "");
+                    createTableElement(values[j], "Unknown", "Unknown");
+                }
             }
         });
 }
