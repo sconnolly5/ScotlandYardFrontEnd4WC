@@ -18,8 +18,9 @@ function jsonDisplayActiveGames() {
 
 function csvDisplayActiveGames() {
     var url = PROTOCOL + SERVER_URL + ":" + SERVER_PORT + CSV_GET_GAMES_URL;
-    $.get(url,
-        function(data) {
+    $.get({
+        url: url,
+        success: function(data) {
             lines = data.split("\n");
             // If first line didn't exist? Invalid response
             if (isNull(lines[0])) {
@@ -44,7 +45,9 @@ function csvDisplayActiveGames() {
                     createTableElement(values[j], "Unknown", "Unknown");
                 }
             }
-        });
+        },
+        dataType: "text"
+    });
 }
 
 function createTableElement(id, numPlayers, mapName) {
