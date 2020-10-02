@@ -11,22 +11,51 @@ function jsonDisplayActiveGames() {
     $.getJSON(url,
         function(data) {
             $.each(data, function(key, value) {
-                var rowCount = (($('#tblActiveGames tr').length) - 1);
-                var newEle = $('#templateRow').clone();
-                newEle.attr("id", "row" + rowCount.toString());
-                newEle.removeClass("d-none");
-                newEle.find("#templateId").text(value.gameId);
-                newEle.find("#templateNumPlayers").text(value.numPlayers);
-                newEle.find("#templateMap").text(value.mapName);
-                let redirectLocation = window.location.href;
-                redirectLocation = redirectLocation.replace(ACTIVE_GAMES_PAGE_NAME, MAP_PAGE);
-                let newUrl = redirectLocation + "?" + SERVER_GAME_ID_PARAM + "=" + value.gameId.toString();
-                newEle.find("#templateJoin").find('a').attr("href", newUrl);
-                $('#tblActiveGames').find('tbody').append(newEle);
+                createTableElement(value.gameId, value.numPlayers, value.mapName);
             });
         });
 }
 
 function csvDisplayActiveGames() {
-    console.log("CSV SETUP HAS NOT YET BEEN IMPLEMENTED.");
+    var url = PROTOCOL + SERVER_URL + ":" + SERVER_PORT + CSV_GET_GAMES_URL;
+    $.get(url,
+        function(data) {
+            lines = data.split("\n");
+            // If first line didn't exist? Invalid response
+            if (isNull(lines[0])) {
+                console.log("Error recieved from server. Not able to retrieve games.");
+                return;
+            }
+
+            // If response was not OK
+            if (lines[0].split(",")[0] !== "OK") {
+                console.log("Error recieved from server. Not able to retrieve games.");
+                return;
+            }
+
+            // Trim the response status
+            lines.shift();
+
+            // Put each game ID into the table
+            for (var i = 0; i < lines.length; i++) {
+                values = line.split(",");
+                values[0] = values[0].replace("\"", "");
+                createTableElement(values[0], 0, "???");
+            }
+        });
+}
+
+function createTableElement(id, numPlayers, mapName) {
+    var rowCount = (($('#tblActiveGames tr').length) - 1);
+    var rowEle = $('#templateRow').clone();
+    rowEle.attr("id", "row" + rowCount.toString());
+    rowEle.removeClass("d-none");
+    rowEle.find("#templateId").text(id);
+    rowEle.find("#templateNumPlayers").text(numPlayers);
+    rowEle.find("#templateMap").text(mapName);
+    let redirectLocation = window.location.href;
+    redirectLocation = redirectLocation.replace(ACTIVE_GAMES_PAGE_NAME, MAP_PAGE);
+    let newUrl = redirectLocation + "?" + SERVER_GAME_ID_PARAM + "=" + id.toString();
+    rowEle.find("#templateJoin").find('a').attr("href", newUrl);
+    $('#tblActiveGames').find('tbody').append(rowEle);
 }
