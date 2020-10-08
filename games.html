@@ -15,7 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-    <script src="js/lobbies.js"></script>
+    <script src="js/globals.js"></script>
+    <script src="js/csvFunctions.js"></script>
+    <script src="js/buttons.js"></script>
+    <script src="js/activeGames.js"></script>
 
     <title>4 Week Challenge</title>
 </head>
@@ -37,42 +40,34 @@
                 </li>
             </ul>
         </div>
-        <a class="btn btn-success ml-auto mx-2" href="joinLobby.html">Join Lobby</a>
-        <a class="btn btn-primary ml-auto" href="#">Create New Lobby</a>
+        <button class="btn btn-primary ml-auto" id="btnViewGames">View active games</button>
     </nav>
 
     <!-- Contnet -->
-    <div class="container py-3">
+    <div class="container-flex py-3">
+        <!-- Introduction section -->
         <div class="row">
             <div class="col"></div>
             <div class="col-8">
-                <h1 class="text-center">Lobby</h1>
-            </div>
-            <div class="col"></div>
-        </div>
-        <div class="row py-3">
-            <div class="col"></div>
-            <div class="col">
-                <div class="bg-success p-3 rounded">
-                    <p class="text-center text-light" id="lobbyCode">AAAA</p>
-                </div>
-            </div>
-            <div class="col"></div>
-        </div>
-        <div class="row py-3">
-            <div class="col"></div>
-            <div class="col-8">
-                <h1 class="text-center">Map</h1>
-                <form>
-                    <div class="form-group">
-                        <label for="cboMap">Map selection</label>
-                        <select class="form-control" id="cboMap">
-                          <option>Small</option>
-                          <option>Medium</option>
-                          <option>Large</option>
-                        </select>
-                    </div>
-                </form>
+                <h1>Active Games</h1>
+                <table id="tblActiveGames" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Game ID</th>
+                            <th scope="col">Number of Players</th>
+                            <th scope="col">Map</th>
+                            <th scope="col">Link to Game</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="templateRow" class="d-none">
+                            <th scope="row" id="templateId"></th>
+                            <td id="templateNumPlayers"></td>
+                            <td id="templateMap"></td>
+                            <td id="templateJoin"><a href="#">View map</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="col"></div>
         </div>
