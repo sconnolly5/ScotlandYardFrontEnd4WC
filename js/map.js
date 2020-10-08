@@ -113,12 +113,40 @@ function csvMapUpdate() {
         }
 
         let players = csvParseValuesIntoArrayByLines(data);
+
+        $(".playerDetails").remove();
         for (var i = 0; i < players.length; i++) {
             let playerDetails = players[i];
-            let pos = graphNodePositions[playerDetails[CSV_PLAYER_POSITION_INDEX] - 1].value;
-            drawPlayer(playerDetails[CSV_PLAYER_COLOUR_INDEX], pos);
+
+            if (!isMrX(playerDetails)) {
+                $("#playerName" + i.toString()).parent().parent().remove();
+                // Create new player name ele
+                playerRowEle = $("#playerTicketsTemplate").clone();
+                setId(playerRowEle, "playerDetails") 
+                playerRowEle.addClass("playerDetails");
+                playerRowEle.removeClass("d-none");
+                SetTicketValues(playerRowEle, playerDetails, i);
+                let pos = graphNodePositions[playerDetails[CSV_PLAYER_POSITION_INDEX] - 1].value;
+                drawPlayer(playerDetails[CSV_PLAYER_COLOUR_INDEX], pos);
+            }
         }
     });
+}
+
+function isMrX(playerDetails) {
+    return playerDetails[CSV_PLAYER_COLOUR_INDEX] === "clear";
+}
+
+function SetTicketValues(playerRowEle, playerDetails, playerIndex) {
+    playerRowEle.find("#playerName").text(playerDetails[CSV_PLAYER_NAME_INDEX] + " (" + playerDetails[CSV_PLAYER_COLOUR_INDEX] + ")");
+    setId(playerRowEle.find("#playerName"), "playerName" + playerIndex.toString());
+    playerRowEle.find("#yellowTickets").text(playerDetails[CSV_PLAYER_YELLOW_TICKETS_INDEX]);
+    setId(playerRowEle.find("#yellowTickets"), "yellowTickets" + playerIndex.toString());
+    playerRowEle.find("#greenTickets").text(playerDetails[CSV_PLAYER_GREEN_TICKETS_INDEX]);
+    setId(playerRowEle.find("#greenTickets"), "greenTickets" + playerIndex.toString());
+    playerRowEle.find("#redTickets").text(playerDetails[CSV_PLAYER_RED_TICKETS_INDEX]);
+    setId(playerRowEle.find("#redTickets"), "redTickets" + playerIndex.toString());
+    $("#playerTicketsContainer").append(playerRowEle);
 }
 
 function getUrlParam(param) {
@@ -131,4 +159,8 @@ function clearCanvas() {
     let canvasEle = document.getElementById('canvas');
     const context = canvasEle.getContext('2d');
     context.clearRect(0, 0, canvasEle.width, canvasEle.height);
+}
+
+function setId(element, id) {
+    element.attr('id', id);
 }
