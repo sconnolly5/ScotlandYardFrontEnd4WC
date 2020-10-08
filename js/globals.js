@@ -12,6 +12,7 @@ const MAP_PAGE = "/map.html";
 const USE_JSON_API = false;
 const DEFAULT_MAP_SIZE_X = 1065;
 const DEFAULT_MAP_SIZE_Y = 800;
+const IMAGES_DIR = "images/";
 
 // Constants specific to the CSV server
 const CSV_GET_GAMES_URL = "/preston/getGames";

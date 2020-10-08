@@ -48,7 +48,7 @@ function initialiseMap() {
     let ctx = canvasEle[0].getContext("2d");
     ctx.canvas.height = mapEle.height();
     ctx.canvas.width = mapEle.width();
-    mapImg.src = "images/" + mapFile;
+    mapImg.src = IMAGES_DIR + mapFile;
     ctx.drawImage(mapImg, 0, 0, mapImg.width = width, mapImg.height = height);
 }
 
