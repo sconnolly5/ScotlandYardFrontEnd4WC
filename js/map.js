@@ -101,7 +101,7 @@ function csvMapUpdate() {
     $.get(url, function(data) {
         clearCanvas();
         initialiseMap();
-        
+
         if (!csvResponseMessageOkay(data)) {
             console.log("Response was not okay. Not doing anything. Response was: " + data);
             return;
@@ -118,17 +118,17 @@ function csvMapUpdate() {
         for (var i = 0; i < players.length; i++) {
             let playerDetails = players[i];
 
-            if (!isMrX(playerDetails)) {
+        //    if (!isMrX(playerDetails)) {
                 $("#playerName" + i.toString()).parent().parent().remove();
                 // Create new player name ele
                 playerRowEle = $("#playerTicketsTemplate").clone();
-                setId(playerRowEle, "playerDetails") 
+                setId(playerRowEle, "playerDetails")
                 playerRowEle.addClass("playerDetails");
                 playerRowEle.removeClass("d-none");
                 SetTicketValues(playerRowEle, playerDetails, i);
                 let pos = graphNodePositions[playerDetails[CSV_PLAYER_POSITION_INDEX] - 1].value;
                 drawPlayer(playerDetails[CSV_PLAYER_COLOUR_INDEX], pos);
-            }
+        //    }
         }
     });
 }
